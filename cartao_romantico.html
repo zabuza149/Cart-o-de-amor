@@ -27,6 +27,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 1s ease;
+      z-index: 2;
     }
 
     .slide.active {
@@ -55,6 +56,7 @@
       transition: transform 0.2s, background-color 0.3s;
       animation: fadeIn 1.2s ease forwards;
       opacity: 0;
+      z-index: 3;
     }
 
     .button:hover {
@@ -69,7 +71,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
 
     .heart {
@@ -78,7 +80,8 @@
       height: 20px;
       background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/33/Red_Heart.svg');
       background-size: cover;
-      animation: float 6s infinite;
+      animation: float 6s linear infinite;
+      opacity: 0.8;
     }
 
     @keyframes float {
@@ -111,12 +114,16 @@
         opacity: 1;
       }
     }
+
+    audio {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <!-- Música -->
   <audio id="bgm" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+    <source src="https://archive.org/download/arctic-monkeys-i-wanna-be-yours/Arctic%20Monkeys%20-%20I%20Wanna%20Be%20Yours.mp3" type="audio/mp3">
     Seu navegador não suporta áudio.
   </audio>
 
@@ -163,6 +170,7 @@
 
     function playMusic() {
       const audio = document.getElementById("bgm");
+      audio.currentTime = 40; // começa em 0:40
       audio.play().catch(() => {
         alert("Clique para permitir a música.");
       });
