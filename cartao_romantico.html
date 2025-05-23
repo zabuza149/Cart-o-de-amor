@@ -2,18 +2,17 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dia Meu Amor</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: sans-serif;
       background-color: #8B0000;
       color: white;
       overflow: hidden;
     }
-
     .slide {
       position: absolute;
       top: 0;
@@ -24,25 +23,20 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      transition: opacity 0.8s ease-in-out, transform 0.5s ease;
+      transition: opacity 0.6s ease-in-out;
       opacity: 0;
       pointer-events: none;
-      transform: scale(0.95);
     }
-
     .slide.active {
       opacity: 1;
       pointer-events: auto;
-      transform: scale(1);
     }
-
     img {
       max-width: 90%;
       max-height: 80vh;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
-
     .button {
       margin-top: 20px;
       padding: 12px 24px;
@@ -54,11 +48,9 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
     .button:hover {
       background-color: #f1f1f1;
     }
-
     .particles {
       position: fixed;
       top: 0;
@@ -68,7 +60,6 @@
       pointer-events: none;
       z-index: 0;
     }
-
     .heart {
       position: absolute;
       width: 20px;
@@ -77,7 +68,6 @@
       background-size: cover;
       animation: float 6s infinite;
     }
-
     @keyframes float {
       0% {
         transform: translateY(100vh) scale(1);
@@ -88,36 +78,31 @@
         opacity: 0;
       }
     }
-
-    audio {
-      display: none;
-    }
   </style>
 </head>
 <body>
-
-  <!-- Música de fundo -->
-  <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2a8275edc1.mp3" type="audio/mpeg">
+  <!-- Música -->
+  <audio id="bgm" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
     Seu navegador não suporta áudio.
   </audio>
 
-  <!-- Slide 1 -->
+  <!-- Slide 1: Cartão -->
   <div class="slide active" id="slide1">
     <img src="cartao.png" alt="Cartão de Imagens">
+    <button class="button" onclick="playMusic()">Tocar Música</button>
     <button class="button" onclick="nextSlide()">Próximo</button>
   </div>
 
-  <!-- Slide 2 -->
+  <!-- Slide 2: Mensagem -->
   <div class="slide" id="slide2">
-    <img src="mensagem.png" alt="Mensagem de Amor">
+    <img src="mensagem.png" alt="Mensagem">
     <button class="button" onclick="prevSlide()">Voltar</button>
   </div>
 
   <!-- Partículas -->
   <div class="particles" id="particles"></div>
 
-  <!-- Script -->
   <script>
     function nextSlide() {
       document.getElementById('slide1').classList.remove('active');
@@ -142,6 +127,13 @@
     }
 
     setInterval(createHeart, 400);
+
+    function playMusic() {
+      const audio = document.getElementById("bgm");
+      audio.play().catch(e => {
+        alert("Clique no botão para permitir a música.");
+      });
+    }
   </script>
 </body>
 </html>
